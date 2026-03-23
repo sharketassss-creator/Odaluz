@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti mi rayito de luz ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+
+    background:
+    radial-gradient(circle at top left, rgba(255,77,109,0.3), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,143,171,0.2), transparent 30%),
+    linear-gradient(135deg, #090909, #141414);
+}
+
+/* pantalla inicial */
+#inicio{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+}
+
+#inicio button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+}
+
+/* contenido */
+.page{
+    display:none;
+    padding:40px 20px;
+}
+
+/* texto */
+#texto{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+#texto{
+    max-width: 720px;
+    margin: 0 auto 20px;
+    line-height: 1.4;
+}
+
+/* imagen y video */
+img, video{
+    max-width:300px;
+    width:100%;
+    border-radius:15px;
+    margin:10px auto;
+    display:block;
+}
+
+/* botón */
+button{
+    background:#ff4d6d;
+    border:none;
+    padding:12px 25px;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+/* decoraciones */
+.decor{
+    position:fixed;
+    width:250px; //
+    opacity:0.8;
+    pointer-events:none;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+}
+}
+
+#dec1{ top:5%; left:3%; }
+#dec2{ top:15%; right:5%; }
+#dec3{ top:60%; left:4%; }
+#dec4{ bottom:10%; right:3%; }
+@media (max-width: 600px){
+    .decor{
+        width:80px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- decoraciones -->
+<img src="config/mono1.png" class="decor" id="dec1">
+<img src="config/mono2.png" class="decor" id="dec2">
+<img src="config/mono3.png" class="decor" id="dec3">
+<img src="config/mono4.png" class="decor" id="dec4">
+
+<!-- pantalla inicial -->
+<div id="inicio">
+    <h1>
+Hola mi amor bello,<br>
+no sabía muy bien qué elaborar para estos 3 mesesotes,<br>
+pero quería que fuera algo bonito y único<br>
+espero te guste, lo hice con mucho amor ❤️
+</h1>
+    <button onclick="entrar()">Abrir ❤️</button>
+</div>
+
+<!-- música -->
+<audio id="bgMusic" src="config/cancion.mp3"></audio>
+
+<!-- contenido -->
+<div class="page" id="contenido">
+
+<h1>Para ti, mi rayito de luz ❤️</h1>
+
+<div id="media"></div>
+
+<h2 id="texto"></h2>
+
+<button onclick="cambiar()">Siguienteee ❤️</button>
+
+</div>
+
+<script>
+let i = 0;
+
+let contenido = [
+    {
+        texto: "Recuerdo muy bien ese día, porque sin conocerte tanto me nació esforzarme en tu regalo,no sabía exactamente el porque, pero sentía que desde el primero tenía que ser algo especial para ti",
+        img: "config/imagen 1.jpeg"
+    },
+    {
+        texto: "Nuestra primera salida, donde casi no hablamos porque estaba muy nervioso y porque soy un chango menso, pero aún así algo ya sentía diferente y muy bello",
+        img: "config/imagen 2.jpeg"
+    },
+    {
+        texto: "Y esta foto que sé que no te gusta, pero me recuerda al bello primer beso siempre con un toque especial besandote primero el diente, ese momento lo tengo grabado en el alma",
+        img: "config/imagen 3.jpeg"
+    },
+    {
+        texto: "Y poco a poco, sin darnos cuenta, empezamos a construir todo esto",
+        video: "config/video.mp4"
+    },
+    {
+        texto: "Hola mi amor bello tal vez esto no es el gran regalo, pero es una parte de nosotros desde cuando no te hablaba nada porque era un simio y aún así te quedabas,de cuando empezamos a conocernos y todo se sentía medio extraño pero bello,de cada risa, cada momento y también de esos días donde no supimos cómo hacer las cosas tan bien; Contigo he sido muy yo, a veces hasta siento que demasiado, y sé que no siempre de la mejor forma, pero también contigo he sido genuino como con nadie;Sé que me dices que el amor no se agradece, pero gracias por seguir aquí incluso cuando soy un pinche macaco, por tu paciencia y por todo lo bonito que hemos y estamos construyendo;No quiero que esto se quede en solo momentos, quiero aprender a hacer las cosas bien contigo y cuidar lo que tenemos."
+    }
+];
+	
+function entrar(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("contenido").style.display="block";
+
+    let audio = document.getElementById("bgMusic");
+    audio.volume = 0.2;
+    audio.play();
+
+    cambiar(); // cambio de imagwn
+}
+
+function cambiar(){
+    let media = document.getElementById("media");
+    let texto = document.getElementById("texto");
+
+    media.innerHTML = "";
+
+    let item = contenido[i];
+
+    texto.innerText = item.texto;
+
+    if(item.img){
+        media.innerHTML = `<img src="${item.img}">`;
+    }
+
+    if(item.video){
+        media.innerHTML = `<video controls><source src="${item.video}" type="video/mp4"></video>`;
+    }
+
+    i++;
+    if(i >= contenido.length) i = 0;
+}
+</script>
+
+</body>
+</html>
